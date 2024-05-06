@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Заголовок страницы -->
+    <meta charset="UTF-8">
+    <!-- Настройка для адаптивного отображения на мобильных устройствах -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Заголовок страницы, отображаемый во вкладке браузера -->
+    <title>Дипломка</title>
+    <!-- Подключение внешнего файла со стилями -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключение внешнего файла со стилями для иконок Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Подключение шрифтов через Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+      /* Стили для тела страницы */
+      body{
+        line-height: 1.5;
+        font-family: Comic Sans MS;
+      }
+
+      /* Обнуление значений отступов и полей */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Стили для верхнего заголовка */
+      .header {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+      }
+
+      /* Стили для навигационного меню */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        max-width: 80%;
+        margin: auto;
+        padding: 1.4rem 1rem;
+        background-color: #000000b5;
+        backdrop-filter: blur(10px);
+        border-radius: 3rem;
+        margin-top: 1rem;
+      }
+
+      /* Стили для логотипа */
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .logo a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      /* Стили для списка навигации */
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        padding: 0;
+        background-color: transparent;
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+
+      li {
+        padding: 0rem 1.1rem;
+        float: left;
+      }
+
+      li a {
+        color: #e96d3f;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: .7px;
+      }
+
+      /* Стили для подчеркивания активного элемента меню */
+      ul li a {
+        position: relative;
+      }
+
+      ul li a::before {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background-color: #fff;
+      }
+
+      ul li a::before {
+        transform: scale(0, 1);
+        transition: transform .3s ease;
+      }
+
+      ul li a:hover::before {
+        transform: scale(1, 1);
+      }
+      li a.active,
+      li a:hover {
+        color: #fff;
+        transition: all .3s ease-in-out
+      }
+
+      /* Стили для иконки меню на мобильных устройствах */
+      #click {
+        display: none;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      /* Общие стили для контейнера карточек */
+      .container{
+        max-width: 1170px;
+        margin:auto;
+      }
+      
+      /* Общие стили для строки с карточками */
+      .row{
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      /* Стили для контейнера с карточками товаров */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 225px);
+        width: 100%;
+        max-width: 1000px;
+        justify-content: center;
+        justify-items: center;
+        column-gap: 30px;
+        row-gap: 40px;
+        margin: 0 auto;
+      }
+      
+      /* Стили для отдельной карточки товара */
+      .card {
+        width: 200px;
+        margin: 10px;
+        padding: 10px;
+        width: 225px;
+        min-height: 350px;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        border-radius: 4px;
+        transition: 0.2s;
+        position: relative;
+      }
+      
+      .card:hover {
+        box-shadow: 4px 8px 16px rgba(255, 102, 51, 0.2);
+      }
+      
+      .card__top {
+        flex: 0 0 220px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .card__image {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .card__image > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: 0.2s;
+      }
+      
+      .card__image:hover > img {
+        transform: scale(1.1);
+      }
+      
+      .card__label {
+        padding: 4px 8px;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: #ff6633;
+        border-radius: 4px;
+        font-weight: 400;
+        font-size: 16px;
+        color: #fff;
+      }
+      
+      .card__bottom {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        padding: 10px;
+      }
+      
+      .card__prices {
+        display: flex;
+        margin-bottom: 10px;
+        flex: 0 0 50%;
+      }
+      
+      .card__price::after {
+        content: "₸";
+        margin-left: 2px;
+      }
+      
+      .card__old-price {
+        color: #999;
+        font-size: 14px;
+        margin-left: 10px;
+        text-decoration: line-through;
+      }
+      
+      .card__description {
+        flex: 1 1 auto;
+        color: #666;
+        font-size: 14px;
+      }
+      
+      .card__btn {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: #ff6633;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: auto;
+      }
+      
+      .card__btn:hover {
+        background: #ff3300;
+      }
+      
+      .card__btn:active {
+        transform: scale(0.98);
+      }
+
+      /* Стили для футера */
+      .footer{
+        background: #000000;
+        color: #fff;
+        margin-top: 100px;
+        padding: 70px 0;
+      }
+      
+      /* Стили для колонок в футере */
+      .footer-col{
+        width: 25%;
+        padding: 0 15px;
+      }
+      
+      /* Стили для заголовка в колонках футера */
+      .footer-col h4{
+        font-size: 18px;
+        color: #fff;
+        text-transform: capitalize;
+        margin-bottom: 35px;
+        position: relative;
+      }
+      
+      /* Стили для линии в заголовках колонок футера */
+      .footer-col h4::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        background: #e96d3f;
+        height: 2px;
+        box-sizing: border-box;
+        width: 50px;
+      }
+      
+      /* Стили для списка в колонках футера */
+      .footer-col ul li:not(:last-child){
+        margin-bottom: 10px;
+      }
+      
+      /* Стили для ссылок в футере */
+      .footer-col ul li a{
+        font-size: 16px;
+        text-transform: capitalize;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 300;
+        color: rgba(255,255,255,0.5);
+        display: block;
+        transition: color 0.3s ease;
+      }
+      
+      .footer-col ul li a:hover{
+        color: #e96d3f;
+      }
+      
+      /* Стили для социальных иконок в футере */
+      .social-links{
+        padding: 15px 0;
+      }
+      
+      .social-links a{
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 8px;
+        margin: 0 5px;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+      
+      .social-links a:hover{
+        background: #e96d3f;
+        transform: translateY(-5px);
+      }
+
+    </style>
+</head>
+<body>
+    <!-- Заголовок страницы -->
+    <header>
+        <!-- Навигационное меню -->
+        <nav>
+            <!-- Логотип -->
+            <div class="logo">
+                <a href="#">Логотип</a>
+            </div>
+            <!-- Список навигации -->
+            <ul>
+                <li><a href="#" class="active">Главная</a></li>
+                <li><a href="#">Услуги</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+            <!-- Иконка для мобильного меню -->
+            <label for="click" class="mainicon">
+                <i class="fas fa-bars"></i>
+            </label>
+        </nav>
+    </header>
+    <!-- Основное содержимое страницы -->
+    <main>
+        <!-- Контейнер для карточек товаров -->
+        <div class="cards"></div>
+    </main>
+    <!-- Футер страницы -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Колонка футера -->
+                <div class="footer-col">
+                    <h4>О нас</h4>
+                    <ul>
+                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Наша команда</a></li>
+                        <li><a href="#">Карьера</a></li>
+                    </ul>
+                </div>
+                <!-- Колонка футера -->
+                <div class="footer-col">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li><a href="#">Наши услуги</a></li>
+                        <li><a href="#">Цены</a></li>
+                        <li><a href="#">Заказать услугу</a></li>
+                    </ul>
+                </div>
+                <!-- Колонка футера -->
+                <div class="footer-col">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="#">Часто задаваемые вопросы</a></li>
+                        <li><a href="#">Свяжитесь с нами</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                    </ul>
+                </div>
+                <!-- Колонка футера -->
+                <div class="footer-col">
+                    <h4>Подписка на новости</h4>
+                    <ul>
+                        <li><a href="#">Подпишитесь на нашу рассылку</a></li>
+                        <li><a href="#">Будьте в курсе новостей и акций</a></li>
+                    </ul>
+                    <!-- Социальные иконки -->
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
